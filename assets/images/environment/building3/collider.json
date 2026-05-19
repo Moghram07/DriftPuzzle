@@ -1,0 +1,27 @@
+{ "frames": {
+   "Sprite-0003.": {
+    "frame": { "x": 0, "y": 0, "w": 400, "h": 350 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 400, "h": 350 },
+    "sourceSize": { "w": 400, "h": 350 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.16.1-x64",
+  "image": "newBuilding.png",
+  "format": "RGBA8888",
+  "size": { "w": 400, "h": 350 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Layer 1", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+   { "name": "Slice 1", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 7, "w": 400, "h": 336 } }] }
+  ]
+ }
+}

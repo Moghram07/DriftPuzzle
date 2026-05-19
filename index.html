@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Desert Drive</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+
+  <!-- 1. Data — pure static objects, no dependencies -->
+  <script src="js/data/Colliders.js"></script>
+  <script src="js/data/WorldMap.js"></script>
+
+  <!-- 2. Core — Config reads ColliderData, AssetManager reads Config -->
+  <script src="js/core/Config.js"></script>
+  <script src="js/core/AssetManager.js"></script>
+  <script src="js/core/Debug.js"></script>
+
+  <!-- 3. Physics — reads Config + ColliderData, no entity deps -->
+  <script src="js/physics/SATDetection.js"></script>
+  <script src="js/physics/ColliderHelpers.js"></script>
+  <script src="js/physics/CollisionDetection.js"></script>
+  <script src="js/physics/CollisionResponse.js"></script> <!-- ADD THIS -->
+  <script src="js/physics/CollisionPhysics.js"></script>
+  <script src="js/physics/VehicleDynamics.js"></script>
+  <script src="js/physics/VehiclePhysics.js"></script>
+
+  <!-- 4. Systems — World reads CollisionPhysics, particles/dust read Config -->
+  <script src="js/systems/DriveDust.js"></script>
+  <script src="js/systems/CrashDust.js"></script>
+  <script src="js/systems/ParticleSystem.js"></script>
+  <script src="js/systems/TireMarks.js"></script>
+
+  <!-- 5. Components — input + AI, no entity deps -->
+  <script src="js/components/VehicleInput.js"></script>
+  <script src="js/components/CamelAI.js"></script>
+  <script src="js/ai/PoliceAI.js"></script>
+
+  <!-- 6. Rendering — VehicleRenderer needed by Vehicle.draw() -->
+  <script src="js/rendering/Camera.js"></script>
+  <script src="js/rendering/DrawingHelpers.js"></script>
+  <script src="js/rendering/VehicleRenderer.js"></script>
+  <script src="js/rendering/GameRenderer.js"></script>
+
+  <!-- 7. Entities — Vehicle needs VehicleRenderer, PlayerTruck needs VehiclePhysics -->
+  <script src="js/entities/Vehicle.js"></script>
+  <script src="js/entities/PlayerTruck.js"></script>
+  <script src="js/entities/PoliceTruck.js"></script>
+  <script src="js/entities/Camel.js"></script>
+
+  <!-- 8. World — needs Camel + CollisionPhysics -->
+  <script src="js/systems/World.js"></script>
+
+  <!-- 9. Audio — no game-logic deps, only Web Audio + Config -->
+  <script src="js/audio/GameAudioContext.js"></script>
+  <script src="js/audio/SoundLoader.js"></script>
+  <script src="js/audio/VehicleSounds.js"></script>
+  <script src="js/audio/CamelSounds.js"></script>
+  <script src="js/audio/AudioManager.js"></script>
+  <script src="js/audio/GameAudio.js"></script>
+
+  <!-- 10. Game — must be last, depends on everything above -->
+  <script src="js/core/Game.js"></script>
+</head>
+
+<body>
+  <div style="position:absolute;top:10px;right:10px;background:rgba(0,0,0,0.7);color:white;
+              padding:8px;border-radius:4px;font-family:monospace;font-size:12px;">
+    CONTROLS:<br>
+    ↑ / W : Accelerate<br>
+    ↓ / S : Reverse<br>
+    ← / → : Steer<br>
+    SPACE : Handbrake
+  </div>
+</body>
+</html>

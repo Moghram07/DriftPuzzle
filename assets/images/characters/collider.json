@@ -1,0 +1,27 @@
+{ "frames": {
+   "Sprite-0001.": {
+    "frame": { "x": 0, "y": 0, "w": 80, "h": 80 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 80 },
+    "sourceSize": { "w": 80, "h": 80 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.16.1-x64",
+  "format": "RGBA8888",
+  "size": { "w": 80, "h": 80 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Layer 1", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+   { "name": "Camel_Nick_collider", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 4, "y": 21, "w": 33, "h": 5 } }] },
+   { "name": "Camel_Body_collider", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 37, "y": 16, "w": 33, "h": 15 } }] }
+  ]
+ }
+}

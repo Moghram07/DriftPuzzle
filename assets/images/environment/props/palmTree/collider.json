@@ -1,0 +1,27 @@
+{ "frames": {
+   "palmTree1.png": {
+    "frame": { "x": 0, "y": 0, "w": 110, "h": 121 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 110, "h": 121 },
+    "sourceSize": { "w": 110, "h": 121 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.16.1-x64",
+  "image": "palmTree1-sheet.png",
+  "format": "RGBA8888",
+  "size": { "w": 110, "h": 121 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Layer", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+   { "name": "Slice 1", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 51, "y": 35, "w": 17, "h": 19 } }] }
+  ]
+ }
+}
