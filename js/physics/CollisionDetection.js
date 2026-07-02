@@ -11,20 +11,37 @@ class CollisionDetection {
             ? vehicle.getColliderSize()
             : { w: vehicle.w, h: vehicle.d };
 
-        for (const b of world.buildings) {
-            const bc = world.getBuildingCollider(b);
-            if (SATDetection.rectVsRotated(
-                bc.x, bc.y, bc.w, bc.h,
-                vehicle.x, vehicle.y, vSize.w, vSize.h, vehicle.th))
-                hits.push({ type: 'building', obj: b });
-        }
-
-        for (const p of world.palms) {
-            const pc = world.getPalmCollider(p);
-            if (SATDetection.rectVsRotated(
-                pc.x, pc.y, pc.w, pc.h,
-                vehicle.x, vehicle.y, vSize.w, vSize.h, vehicle.th))
-                hits.push({ type: 'palm', obj: p });
+        // Cached static colliders when available (real World); per-item fallback
+        // keeps TestWorld and other stubs working.
+        if (world.getStaticColliders) {
+            const statics = world.getStaticColliders();
+            for (const { obj, col } of statics.buildings) {
+                if (SATDetection.rectVsRotated(
+                    col.x, col.y, col.w, col.h,
+                    vehicle.x, vehicle.y, vSize.w, vSize.h, vehicle.th))
+                    hits.push({ type: 'building', obj });
+            }
+            for (const { obj, col } of statics.palms) {
+                if (SATDetection.rectVsRotated(
+                    col.x, col.y, col.w, col.h,
+                    vehicle.x, vehicle.y, vSize.w, vSize.h, vehicle.th))
+                    hits.push({ type: 'palm', obj });
+            }
+        } else {
+            for (const b of world.buildings) {
+                const bc = world.getBuildingCollider(b);
+                if (SATDetection.rectVsRotated(
+                    bc.x, bc.y, bc.w, bc.h,
+                    vehicle.x, vehicle.y, vSize.w, vSize.h, vehicle.th))
+                    hits.push({ type: 'building', obj: b });
+            }
+            for (const p of world.palms) {
+                const pc = world.getPalmCollider(p);
+                if (SATDetection.rectVsRotated(
+                    pc.x, pc.y, pc.w, pc.h,
+                    vehicle.x, vehicle.y, vSize.w, vSize.h, vehicle.th))
+                    hits.push({ type: 'palm', obj: p });
+            }
         }
 
         for (const camel of world.camels) {
@@ -43,15 +60,27 @@ class CollisionDetection {
     static camelOverlaps(cx, cy, camel, world, playerTruck) {
         const cc = world.getCamelCollider({ x: cx, y: cy });
 
-        for (const b of world.buildings) {
-            const bc = world.getBuildingCollider(b);
-            if (SATDetection.rectOverlap(cc.x, cc.y, cc.w, cc.h, bc.x, bc.y, bc.w, bc.h))
-                return true;
-        }
-        for (const p of world.palms) {
-            const pc = world.getPalmCollider(p);
-            if (SATDetection.rectOverlap(cc.x, cc.y, cc.w, cc.h, pc.x, pc.y, pc.w, pc.h))
-                return true;
+        if (world.getStaticColliders) {
+            const statics = world.getStaticColliders();
+            for (const { col } of statics.buildings) {
+                if (SATDetection.rectOverlap(cc.x, cc.y, cc.w, cc.h, col.x, col.y, col.w, col.h))
+                    return true;
+            }
+            for (const { col } of statics.palms) {
+                if (SATDetection.rectOverlap(cc.x, cc.y, cc.w, cc.h, col.x, col.y, col.w, col.h))
+                    return true;
+            }
+        } else {
+            for (const b of world.buildings) {
+                const bc = world.getBuildingCollider(b);
+                if (SATDetection.rectOverlap(cc.x, cc.y, cc.w, cc.h, bc.x, bc.y, bc.w, bc.h))
+                    return true;
+            }
+            for (const p of world.palms) {
+                const pc = world.getPalmCollider(p);
+                if (SATDetection.rectOverlap(cc.x, cc.y, cc.w, cc.h, pc.x, pc.y, pc.w, pc.h))
+                    return true;
+            }
         }
         if (playerTruck) {
             const ps = playerTruck.getColliderSize();

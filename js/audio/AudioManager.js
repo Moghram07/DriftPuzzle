@@ -27,10 +27,14 @@ class AudioManager {
         console.log('🎧 AudioManager fully initialized');
     }
 
-    update(speed, absSpeed, maxSpeed, isDrifting) {
+    update(speed, absSpeed, maxSpeed) {
         if (!this.initialized) return;
         const speedRatio = Math.min(1, absSpeed / maxSpeed);
-        this.vehicle.update(speedRatio, absSpeed, isDrifting);
+        this.vehicle.update(speedRatio, absSpeed);
+    }
+
+    updateDrift(channel, isDrifting, speedRatio, volume) {
+        if (this.initialized) this.vehicle.updateDrift(channel, isDrifting, speedRatio, volume);
     }
 
     playCrashSound(speed)        { if (this.initialized) this.vehicle.playCrash(speed); }

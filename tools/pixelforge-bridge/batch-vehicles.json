@@ -1,0 +1,103 @@
+[
+  {
+    "label": "smuggler-drift-frames",
+    "tool": "forge_animation",
+    "args": {
+      "description": "1950s tan pickup truck seen directly from above, top-down view, nose pointing up, matching the reference truck in proportions and palette. The truck is ONE RIGID SINGLE OBJECT: cab, bed and chassis always stay one straight unbent shape in every frame",
+      "action": "steering and drifting: the whole truck rotates together as one rigid body",
+      "frames": 3,
+      "frameDescriptions": [
+        "truck perfectly vertical, nose straight up, wheels aligned forward",
+        "the ENTIRE truck (cab, bed, chassis and all four wheels together) rotated about 12 degrees counterclockwise as one rigid unbent vehicle, front wheels slightly steered into the turn",
+        "the ENTIRE truck rotated about 30 degrees counterclockwise as one rigid unbent vehicle, front wheels countersteered, small dust puffs at the rear wheels"
+      ],
+      "names": ["straight", "turn", "drift"],
+      "outputPrefix": "C:/Users/Omar Alshehri/Desktop/DriftPuzzle/assets/images/vehicles/smuggler/smuggler",
+      "size": 128,
+      "style": "retro",
+      "useTemplate": true,
+      "references": ["C:/Users/Omar Alshehri/Desktop/DriftPuzzle/assets/images/vehicles/SmugglerTruck.png"]
+    }
+  },
+  {
+    "label": "police-drift-frames",
+    "tool": "forge_animation",
+    "args": {
+      "description": "1950s blue police pickup truck seen directly from above, top-down view, nose pointing up, matching the reference truck in proportions and palette. The truck is ONE RIGID SINGLE OBJECT: cab, bed and chassis always stay one straight unbent shape in every frame",
+      "action": "steering and drifting: the whole truck rotates together as one rigid body",
+      "frames": 3,
+      "frameDescriptions": [
+        "truck perfectly vertical, nose straight up, wheels aligned forward",
+        "the ENTIRE truck (cab, bed, chassis and all four wheels together) rotated about 12 degrees counterclockwise as one rigid unbent vehicle, front wheels slightly steered into the turn",
+        "the ENTIRE truck rotated about 30 degrees counterclockwise as one rigid unbent vehicle, front wheels countersteered, small dust puffs at the rear wheels"
+      ],
+      "names": ["straight", "turn", "drift"],
+      "outputPrefix": "C:/Users/Omar Alshehri/Desktop/DriftPuzzle/assets/images/vehicles/police/police",
+      "size": 128,
+      "style": "retro",
+      "useTemplate": true,
+      "references": ["C:/Users/Omar Alshehri/Desktop/DriftPuzzle/assets/images/vehicles/PoliceTruck.png"]
+    }
+  },
+  {
+    "label": "player-drift-frames",
+    "tool": "forge_animation",
+    "args": {
+      "description": "1950s red pickup truck seen directly from above, top-down view, nose pointing up, matching the reference truck in proportions and palette. The truck is ONE RIGID SINGLE OBJECT: cab, bed and chassis always stay one straight unbent shape in every frame",
+      "action": "steering and drifting: the whole truck rotates together as one rigid body",
+      "frames": 3,
+      "frameDescriptions": [
+        "truck perfectly vertical, nose straight up, wheels aligned forward",
+        "the ENTIRE truck (cab, bed, chassis and all four wheels together) rotated about 12 degrees counterclockwise as one rigid unbent vehicle, front wheels slightly steered into the turn",
+        "the ENTIRE truck rotated about 30 degrees counterclockwise as one rigid unbent vehicle, front wheels countersteered, small dust puffs at the rear wheels"
+      ],
+      "names": ["straight", "turn", "drift"],
+      "outputPrefix": "C:/Users/Omar Alshehri/Desktop/DriftPuzzle/assets/images/vehicles/player/player",
+      "size": 128,
+      "style": "retro",
+      "useTemplate": true,
+      "references": ["C:/Users/Omar Alshehri/Desktop/DriftPuzzle/assets/images/vehicles/PlayerTruck.png"]
+    }
+  },
+  {
+    "label": "police-beacon-flash",
+    "tool": "forge_animation",
+    "args": {
+      "description": "1950s blue police pickup truck, entire truck fully visible and small in the center of the frame with generous empty margin on all sides, seen from directly above in top-down view, nose pointing up toward the top of the frame, same size and framing as the reference truck sprite",
+      "action": "roof beacon flashing",
+      "frames": 2,
+      "frameDescriptions": [
+        "single round beacon dome on the cab roof shown dark dull red, truck otherwise identical",
+        "single round beacon dome on the cab roof shown glowing bright red with a small halo, truck otherwise identical"
+      ],
+      "names": ["beacon-off", "beacon-on"],
+      "outputPrefix": "C:/Users/Omar Alshehri/Desktop/DriftPuzzle/assets/images/vehicles/police/police",
+      "size": 128,
+      "style": "retro",
+      "useTemplate": true,
+      "references": ["C:/Users/Omar Alshehri/Desktop/DriftPuzzle/assets/images/vehicles/PoliceTruck.png"]
+    }
+  },
+  {
+    "label": "smuggler-loaded-1crate",
+    "tool": "forge_sprite",
+    "args": {
+      "description": "1950s tan pickup truck seen directly from above, top-down view, nose pointing up, one wooden cargo crate bound with rope sitting in the open truck bed, matching the reference truck exactly in proportions and palette",
+      "outputPath": "C:/Users/Omar Alshehri/Desktop/DriftPuzzle/assets/images/vehicles/smuggler/smuggler-loaded-1.png",
+      "size": 128,
+      "style": "retro",
+      "references": ["C:/Users/Omar Alshehri/Desktop/DriftPuzzle/assets/images/vehicles/SmugglerTruck.png"]
+    }
+  },
+  {
+    "label": "smuggler-loaded-3crates",
+    "tool": "forge_sprite",
+    "args": {
+      "description": "1950s tan pickup truck seen directly from above, top-down view, nose pointing up, three wooden cargo crates stacked and roped down filling the open truck bed, matching the reference truck exactly in proportions and palette",
+      "outputPath": "C:/Users/Omar Alshehri/Desktop/DriftPuzzle/assets/images/vehicles/smuggler/smuggler-loaded-3.png",
+      "size": 128,
+      "style": "retro",
+      "references": ["C:/Users/Omar Alshehri/Desktop/DriftPuzzle/assets/images/vehicles/SmugglerTruck.png"]
+    }
+  }
+]

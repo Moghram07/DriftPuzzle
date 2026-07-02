@@ -104,6 +104,48 @@ const Config = {
     TRACK_MAX_COUNT: 250,
     DRIFT_MARK_SLIP_THRESHOLD: 0.25, // lateral slip ratio to start leaving marks
 
+    // ── Vehicle-vs-vehicle collision (VehicleCollision.js) ───────────────────
+    // Rigid-body impulse model. Restitution scales with closing speed:
+    // slow contact = soft push, fast crash = real bounce.
+    VC_RESTITUTION_MIN:   0.06,   // restitution floor (gentle contact)
+    VC_RESTITUTION_MAX:   0.38,   // restitution cap (violent crash)
+    VC_FRICTION:          0.65,   // tire scrub friction at the contact (Coulomb μ)
+    VC_INERTIA:           900,    // yaw inertia — higher = harder to spin a truck
+    VC_MAX_IMPACT_YAW:    0.32,   // cap on collision-induced yaw rate (rad/frame)
+    VC_YAW_DECAY:         0.90,   // per-frame decay of collision yaw (ground grip recovering)
+    VC_SIDE_SPIN_IMPULSE: 16,     // side-impact Δv that breaks traction (spin-out)
+    VC_SEPARATION_SLOP:   0.5,    // allowed overlap before positional correction (px)
+
+    // ── Police AI (PoliceAI.js) ───────────────────────────────────────────────
+    // The AI models its own physics: braking distance D = K1·speed² + K2·momentum
+    // (calibrated ≈350px from full speed), steady-state min turn radius ≈130px.
+    AI_LOOK_BUFFER:       60,     // px added to braking distance for ray length
+    AI_LOOK_MIN:          170,    // px minimum lookahead — a slow car must not be blind
+    AI_MARGIN_BASE:       14,     // px wall margin at standstill
+    AI_MARGIN_SPEED_K:    3.0,    // extra margin px per px/frame of path speed
+    AI_NUM_RAYS:          9,
+    AI_RAY_SPREAD:        Math.PI * 0.75,
+    AI_RAY_STEPS:         10,
+    AI_ALIGN_WEIGHT:      0.4,    // ray score: alignment vs clearance weight
+    AI_MIN_RADIUS:        130,    // steady-state min turn radius (px)
+    AI_CORNER_MIN_SPEED:  1.6,    // never slow below this for a corner
+    AI_BRAKE_K1:          8.5,    // braking-distance fit: K1·speed²
+    AI_BRAKE_K2:          1.6,    // braking-distance fit: K2·momentum
+    AI_LEAD_MAX_T:        45,     // frames of player-velocity extrapolation cap
+    AI_STEER_KP:          6.0,    // steer = clamp(KP·(phiDesired − phi))
+    AI_STEER_HORIZON:     12,     // frames to close the heading error
+    AI_STUCK_WINDOW:      25,     // low-displacement frames before recovery
+    AI_STUCK_SPEED:       0.35,   // avg px/frame below which "not moving"
+    AI_RECOVER_MIN:       15,     // min recovery frames (anti-oscillation)
+    AI_RECOVER_MAX:       90,     // hard cap on recovery duration
+    AI_RECOVER_COOLDOWN:  20,     // frames before recovery can retrigger
+    AI_RECOVER_CLEAR:     80,     // forward clearance px required to exit recovery
+    AI_DRIFT_ANGLE_MIN:   1.0,    // rad heading error to trigger drift-turn
+    AI_DRIFT_SPEED_MIN:   9.0,    // path speed px/frame to trigger drift-turn
+    AI_DRIFT_TIMEOUT:     45,     // frames before drift-turn aborts
+    AI_CONTACT_RANGE:     80,     // px: within this, match player speed + overspeed
+    AI_CONTACT_OVERSPEED: 1.0,
+
     // ── Audio ─────────────────────────────────────────────────────────────────
     AUDIO_ENABLED:  true,
     ENGINE_VOLUME:  0.25,

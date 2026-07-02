@@ -1,0 +1,82 @@
+[
+  {
+    "label": "building1-masmak-fort",
+    "tool": "forge_background",
+    "args": {
+      "description": "true top-down orthographic view, camera pointing straight down at 90 degrees, GTA 1 style SNES-era top-down game tile: the roof plan of a Najdi mud-brick fort like Masmak fortress filling the entire image edge to edge, four round crenellated corner towers drawn as flat concentric circles, straight mud walls between them drawn as flat bands with triangular crenellation teeth, a square inner courtyard of packed sand with a small square keep roof, only flat rooftops visible, absolutely no building walls or sides visible, flat ambient lighting, no cast shadows, no perspective, no vanishing point, sand and ochre pixel art palette",
+      "outputPath": "C:/Users/Omar Alshehri/Desktop/DriftPuzzle/assets/images/environment/building1/texture.png",
+      "aspect": "4:3",
+      "style": "retro"
+    }
+  },
+  {
+    "label": "building2-souq-parasols",
+    "tool": "forge_background",
+    "args": {
+      "description": "true top-down orthographic view, camera pointing straight down at 90 degrees, GTA 1 style SNES-era top-down game tile: the roof plan of a 1950s Arabian souq market hall filling the entire image edge to edge, flat mud-brick roof with rows of round market parasols drawn as flat circles with radial segments in tan and cream with one red accent parasol, square stall awnings drawn as flat rectangles, crates and rolled carpets drawn flat, only flat rooftops visible, absolutely no walls or sides visible, flat ambient lighting, no cast shadows, no perspective, sand and ochre pixel art palette",
+      "outputPath": "C:/Users/Omar Alshehri/Desktop/DriftPuzzle/assets/images/environment/building2/texture.png",
+      "aspect": "4:3",
+      "style": "retro"
+    }
+  },
+  {
+    "label": "building3-courtyard-house",
+    "tool": "forge_background",
+    "args": {
+      "description": "true top-down orthographic view, camera pointing straight down at 90 degrees, GTA 1 style SNES-era top-down game tile: the roof plan of a 1950s Najdi mud-brick house filling the entire image edge to edge, flat packed-mud roof with a rectangular open courtyard drawn as a flat inset with a small palm tree drawn as a flat green starburst and clay pots drawn as flat circles, low parapet with triangular Najdi crenellations drawn as a flat border pattern, only flat rooftops visible, absolutely no walls or sides visible, flat ambient lighting, no cast shadows, no perspective, sand and ochre pixel art palette",
+      "outputPath": "C:/Users/Omar Alshehri/Desktop/DriftPuzzle/assets/images/environment/building3/texture.png",
+      "aspect": "4:3",
+      "style": "retro"
+    }
+  },
+  {
+    "label": "building4-mosque",
+    "tool": "forge_background",
+    "args": {
+      "description": "true top-down orthographic view, camera pointing straight down at 90 degrees, GTA 1 style SNES-era top-down game tile: the roof plan of a small 1950s Najdi mosque filling the entire image edge to edge, flat mud roof with one modest dome drawn as flat concentric circles near the center, a square minaret drawn as a flat square with a small circle inside at one corner, low crenellated parapet drawn as a flat border pattern, only flat rooftops visible, absolutely no walls or sides visible, flat ambient lighting, no cast shadows, no perspective, sand and ochre pixel art palette",
+      "outputPath": "C:/Users/Omar Alshehri/Desktop/DriftPuzzle/assets/images/environment/building4/texture.png",
+      "aspect": "4:3",
+      "style": "retro"
+    }
+  },
+  {
+    "label": "building5-caravanserai",
+    "tool": "forge_background",
+    "args": {
+      "description": "true top-down orthographic view, camera pointing straight down at 90 degrees, GTA 1 style SNES-era top-down game tile: the roof plan of a 1950s desert caravanserai warehouse filling the entire image edge to edge, one large flat packed-mud roof divided into storage bays by thin wooden support beams drawn as flat lines, stacks of square wooden cargo crates, round woven baskets, coiled ropes and folded canvas tarps arranged on the roof in groups, all drawn completely flat like a board game map, only the flat roof visible, absolutely no walls or sides visible, flat ambient lighting, no cast shadows, no perspective, sand and ochre pixel art palette",
+      "outputPath": "C:/Users/Omar Alshehri/Desktop/DriftPuzzle/assets/images/environment/building5/texture.png",
+      "aspect": "4:3",
+      "style": "retro"
+    }
+  },
+  {
+    "label": "building6-rooftop-life",
+    "tool": "forge_background",
+    "args": {
+      "description": "true top-down orthographic view, camera pointing straight down at 90 degrees, GTA 1 style SNES-era top-down game tile: the roof plan of a 1950s Najdi mud-brick house filling the entire image edge to edge, flat roof with colorful patterned rugs drawn as flat rectangles drying in the sun, a row of clay water jars drawn as flat circles along the parapet, a small square stairwell hatch in one corner, low crenellated parapet drawn as a flat border pattern, only flat rooftops visible, absolutely no walls or sides visible, flat ambient lighting, no cast shadows, no perspective, sand and ochre palette with faded red and teal rug accents",
+      "outputPath": "C:/Users/Omar Alshehri/Desktop/DriftPuzzle/assets/images/environment/building6/texture.png",
+      "aspect": "4:3",
+      "style": "retro"
+    }
+  },
+  {
+    "label": "building7-palm-grove",
+    "tool": "forge_background",
+    "args": {
+      "description": "true top-down orthographic view, camera pointing straight down at 90 degrees, GTA 1 style SNES-era top-down game tile: the plan of a walled 1950s Riyadh oasis garden plot filling the entire image edge to edge, neat parallel rows of green crops drawn as flat stripes, several date palms drawn as flat green starburst circles, an irrigation channel drawn as a thin flat blue line, a low mud wall border drawn as a flat band around the edge, only flat ground and treetops visible, absolutely no walls or sides visible, flat ambient lighting, no cast shadows, no perspective, sand ochre and palm green pixel art palette",
+      "outputPath": "C:/Users/Omar Alshehri/Desktop/DriftPuzzle/assets/images/environment/building7/texture.png",
+      "aspect": "4:3",
+      "style": "retro"
+    }
+  },
+  {
+    "label": "building8-dense-block",
+    "tool": "forge_background",
+    "args": {
+      "description": "true top-down orthographic view, camera pointing straight down at 90 degrees, GTA 1 style SNES-era top-down game tile: the roof plan of a dense old-town 1950s Najdi mud-brick block filling the entire image edge to edge, several adjoining flat roofs in slightly different sand tones separated by thin flat parapet lines, one tiny square lightwell, a wooden ladder drawn flat across one roof, woven mats and burlap sacks drawn as flat shapes, only flat rooftops visible, absolutely no walls or sides visible, flat ambient lighting, no cast shadows, no perspective, no streets, sand and ochre pixel art palette",
+      "outputPath": "C:/Users/Omar Alshehri/Desktop/DriftPuzzle/assets/images/environment/building8/texture.png",
+      "aspect": "4:3",
+      "style": "retro"
+    }
+  }
+]

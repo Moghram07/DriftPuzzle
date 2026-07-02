@@ -12,6 +12,9 @@ class Vehicle {
         this.d    = 50;      // wheelbase (front-to-rear axle distance)
         this.w    = 30;      // track width
 
+        this.mass       = 1.0;   // relative mass — collision impulses split by this
+        this._impactYaw = 0;     // collision-induced yaw rate (rad/frame), decays out
+
         this.prevX  = x;
         this.prevY  = y;
         this.prevTh = heading;
@@ -20,18 +23,20 @@ class Vehicle {
         this.spriteImg    = spriteImg;
     }
 
-    /** Scaled collision rectangle from sprite bounds. */
+    /** Scaled collision rectangle from sprite bounds. Memoized — called in hot loops. */
     getColliderSize() {
+        if (this._colliderSizeCache) return this._colliderSizeCache;
         if (!this.spriteImg || this.spriteImg.width <= 0) {
-            return { w: this.w, h: this.d };
+            return { w: this.w, h: this.d };   // sprite not loaded yet — don't cache
         }
         const drawW  = Config.TRUCK_DRAW_H * (this.spriteImg.width / this.spriteImg.height);
         const scaleX = drawW / this.colliderData.spriteW;
         const scaleY = Config.TRUCK_DRAW_H / this.colliderData.spriteH;
-        return {
+        this._colliderSizeCache = {
             w: this.colliderData.bounds.w * scaleX,
             h: this.colliderData.bounds.h * scaleY
         };
+        return this._colliderSizeCache;
     }
 
     saveState() {

@@ -1,0 +1,90 @@
+[
+  {
+    "label": "oil-slick",
+    "tool": "forge_sprite",
+    "args": {
+      "description": "dark glossy oil slick puddle with faint iridescent sheen, irregular edges, seen from directly above, top-down view",
+      "outputPath": "C:/Users/Omar Alshehri/Desktop/DriftPuzzle/assets/images/traps/oil-slick.png",
+      "size": 64,
+      "style": "retro",
+      "background": "sand"
+    }
+  },
+  {
+    "label": "sand-berm",
+    "tool": "forge_sprite",
+    "args": {
+      "description": "elongated ridge of piled desert sand seen from directly overhead in strict bird's-eye aerial view, a long dune mound with wind ripple lines across it, highlight along the crest and shadow along one edge, flat map view with no horizon and no perspective",
+      "outputPath": "C:/Users/Omar Alshehri/Desktop/DriftPuzzle/assets/images/traps/sand-berm.png",
+      "size": 128,
+      "style": "retro",
+      "references": ["C:/Users/Omar Alshehri/Desktop/DriftPuzzle/assets/images/environment/desertBackground.png"]
+    }
+  },
+  {
+    "label": "camel-pen",
+    "tool": "forge_animation",
+    "args": {
+      "description": "wooden camel pen enclosure with rough fence posts and a gate, on sand, seen from directly above, top-down view",
+      "action": "gate opening",
+      "frames": 2,
+      "frameDescriptions": [
+        "gate closed, fence fully enclosing the pen",
+        "gate swung open leaving a clear exit gap in the fence"
+      ],
+      "names": ["closed", "open"],
+      "outputPrefix": "C:/Users/Omar Alshehri/Desktop/DriftPuzzle/assets/images/traps/camel-pen",
+      "size": 128,
+      "style": "retro",
+      "useTemplate": true,
+      "references": ["C:/Users/Omar Alshehri/Desktop/DriftPuzzle/assets/images/characters/texture.png"]
+    }
+  },
+  {
+    "label": "souq-stall",
+    "tool": "forge_animation",
+    "args": {
+      "description": "rooftop of a souq market stall seen from directly overhead in strict bird's-eye map view, only the rectangular red and white striped fabric awning roof is visible from above, no sides visible, no perspective, flat aerial view like a building rooftop on a game map",
+      "action": "being smashed flat by a truck, viewed from directly above",
+      "frames": 3,
+      "frameDescriptions": [
+        "intact rectangular striped awning roof seen flat from above",
+        "the striped awning torn open in the middle, splintered wooden frame poking through, seen flat from above",
+        "flattened wreckage seen flat from above: scattered planks, torn striped cloth pieces and spilled pots strewn on the ground"
+      ],
+      "names": ["intact", "broken", "debris"],
+      "outputPrefix": "C:/Users/Omar Alshehri/Desktop/DriftPuzzle/assets/images/traps/souq-stall",
+      "size": 128,
+      "style": "retro",
+      "useTemplate": true,
+      "references": ["C:/Users/Omar Alshehri/Desktop/DriftPuzzle/assets/images/environment/building1/texture.png"]
+    }
+  },
+  {
+    "label": "decoy-crate",
+    "tool": "forge_sprite",
+    "args": {
+      "description": "wooden cargo crate bound with rope, nearly identical to a real cargo crate but with slightly loose rope and one darker plank, seen from directly above, top-down view",
+      "outputPath": "C:/Users/Omar Alshehri/Desktop/DriftPuzzle/assets/images/traps/decoy-crate.png",
+      "size": 48,
+      "style": "retro",
+      "references": ["C:/Users/Omar Alshehri/Desktop/DriftPuzzle/assets/images/cargo/cargo-crate.png"]
+    }
+  },
+  {
+    "label": "trap-icons",
+    "tool": "forge_item_kit",
+    "args": {
+      "items": [
+        "tin oil can icon, 1950s style",
+        "camel head icon",
+        "sand mound icon",
+        "striped market awning icon"
+      ],
+      "names": ["oil", "camel", "berm", "stall"],
+      "outputPrefix": "C:/Users/Omar Alshehri/Desktop/DriftPuzzle/assets/images/ui/trap",
+      "size": 32,
+      "style": "retro"
+    }
+  }
+]

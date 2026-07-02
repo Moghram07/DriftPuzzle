@@ -1,0 +1,5 @@
+# Third-party tool clone (has its own git history; not part of the game)
+game-asset-mcp/
+
+# Windows shell artifact
+nul

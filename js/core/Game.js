@@ -14,6 +14,7 @@ class Game {
         this.audioManager   = null;
         this.audioInitialized = false;   // guard against double-init on rapid keydown
         this.lastCrashFrame = 0;
+        this.lastPoliceCrashFrame  = 0;  // cooldown for police obstacle-crash sound
         this.lastVehicleCrashFrame = 0;  // cooldown for vehicle-vehicle crash sound
     }
 
@@ -44,7 +45,7 @@ class Game {
                 console.error('❌ Audio error:', err);
                 this.audioManager = null;
             }
-        });
+        }, { once: true });
     }
 
     update() {
@@ -65,104 +66,60 @@ class Game {
         }
 
         // ── Vehicle-to-vehicle collision ──────────────────────────────────────
-        // Quick distance cull — OBB check only if trucks are within ~200px
+        // Quick distance cull — full impulse resolution only if within ~200px
         const vcdx = this.player.x - this.police.x;
         const vcdy = this.player.y - this.police.y;
         if (vcdx * vcdx + vcdy * vcdy < 200 * 200) {
-            const pSize   = this.player.getColliderSize();
-            const polSize = this.police.getColliderSize();
-            if (SATDetection.obbVsObb(
-                this.player.x, this.player.y, pSize.w,   pSize.h,   this.player.th,
-                this.police.x, this.police.y, polSize.w, polSize.h, this.police.th
-            )) {
-                const force = this._resolveVehicleCollision(this.player, this.police);
-                if (force > 1 && (fc - this.lastVehicleCrashFrame) > 30) {
-                    this.lastVehicleCrashFrame = fc;
-                    if (this.audioManager) this.audioManager.playCrashSound(force);
-                    this.particles.spawnCrashDust(
-                        (this.player.x + this.police.x) / 2,
-                        (this.player.y + this.police.y) / 2,
-                        this.player.th, force, this.player.momentum, [], this.world
-                    );
-                }
+            const force = VehicleCollision.resolve(this.player, this.police, fc);
+            if (force > 1 && (fc - this.lastVehicleCrashFrame) > 30) {
+                this.lastVehicleCrashFrame = fc;
+                if (this.audioManager) this.audioManager.playCrashSound(force);
+                this.particles.spawnCrashDust(
+                    (this.player.x + this.police.x) / 2,
+                    (this.player.y + this.police.y) / 2,
+                    this.player.th, force, this.player.momentum, [], this.world
+                );
             }
         }
 
         // ── Camera ────────────────────────────────────────────────────────────
         this.camera.follow(this.player, width, height);
 
-        // ── Visual effects ────────────────────────────────────────────────────
-        const p      = this.player;
-        const momMag = Math.sqrt(p.momentum.x ** 2 + p.momentum.y ** 2);
-
-        if (p.frameCollisions.length > 0 && (p.lastImpactForce || 0) > 1) {
-            this.particles.spawnCrashDust(
-                p.x, p.y, p.th, p.lastImpactForce, p.momentum, p.frameCollisions, this.world
-            );
-        }
-
-        if (abs(p.phi) > 0.5 && (abs(p.speed) > 1 || momMag > 6)) {
-            this.tireMarks.addMark(
-                p.x + (p.d / 2) * (p.phi / abs(p.phi)) * sin((-p.phi / abs(p.phi)) * p.th),
-                p.y + (p.d / 2) * cos(p.th),
-                p.th
-            );
-        }
-
-        if (abs(p.speed) > 0.5 || momMag > 2) {
-            this.particles.spawnDust(
-                p.x, p.y, p.th, p.w, p.d, p.speed, p.phi, p.momentum, p.isReversing()
-            );
-        }
-
+        // ── Visual effects (same systems for player and chase car) ───────────
+        this._driveEffects(this.player);
+        this._driveEffects(this.police);
         this.particles.update();
 
         // ── Audio ─────────────────────────────────────────────────────────────
-        this.lastCrashFrame = GameAudio.update(this.player, this.audioManager, this.lastCrashFrame);
+        GameAudio.update(this);
 
         // ── Debug ─────────────────────────────────────────────────────────────
         this.debug.update();
     }
 
-    /**
-     * Resolve a collision between two vehicles.
-     * Pushes them apart, exchanges momentum along the collision normal,
-     * and damps drive speed. Returns the impact force (for audio/particles).
-     */
-    _resolveVehicleCollision(a, b) {
-        // Collision normal: vector from b's center to a's center
-        const dx = a.x - b.x;
-        const dy = a.y - b.y;
-        const dist = Math.sqrt(dx * dx + dy * dy) || 1;
-        const nx = dx / dist;
-        const ny = dy / dist;
+    /** Crash dust, tire marks, drive dust — shared by player and chase car. */
+    _driveEffects(v) {
+        const momMag = Math.sqrt(v.momentum.x ** 2 + v.momentum.y ** 2);
 
-        // Push both apart so they no longer overlap
-        a.x += nx * 5;  a.y += ny * 5;
-        b.x -= nx * 5;  b.y -= ny * 5;
+        if (v.frameCollisions.length > 0 && (v.lastImpactForce || 0) > 1) {
+            this.particles.spawnCrashDust(
+                v.x, v.y, v.th, v.lastImpactForce, v.momentum, v.frameCollisions, this.world
+            );
+        }
 
-        // Relative closing velocity along the normal
-        const relVx  = a.momentum.x - b.momentum.x;
-        const relVy  = a.momentum.y - b.momentum.y;
-        const relVelN = relVx * nx + relVy * ny;
+        if (abs(v.phi) > 0.5 && (abs(v.speed) > 1 || momMag > 6)) {
+            this.tireMarks.addMark(
+                v.x + (v.d / 2) * (v.phi / abs(v.phi)) * sin((-v.phi / abs(v.phi)) * v.th),
+                v.y + (v.d / 2) * cos(v.th),
+                v.th
+            );
+        }
 
-        if (relVelN > 0) return 0;  // already separating — no impulse needed
-
-        // Impulse for equal-mass elastic-ish collision (restitution 0.25)
-        const impulse = -(1 + 0.25) * relVelN / 2;
-
-        a.momentum.x += impulse * nx;  a.momentum.y += impulse * ny;
-        b.momentum.x -= impulse * nx;  b.momentum.y -= impulse * ny;
-
-        // Damp drive speed — harder hit = more damping
-        const damp = impulse > 2 ? 0.5 : 0.75;
-        a.speed *= damp;
-        b.speed *= damp;
-
-        const force = impulse * 2;
-        a.lastImpactForce = force;
-        b.lastImpactForce = force;
-        return force;
+        if (abs(v.speed) > 0.5 || momMag > 2) {
+            this.particles.spawnDust(
+                v.x, v.y, v.th, v.w, v.d, v.speed, v.phi, v.momentum, v.isReversing()
+            );
+        }
     }
 
     draw() {

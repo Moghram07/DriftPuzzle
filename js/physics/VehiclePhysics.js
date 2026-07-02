@@ -37,6 +37,14 @@ class VehiclePhysics {
             v.momentum.y *= Config._MOM_DECAY * Config.FRICTION;
         }
 
+        // Collision-induced rotation: impacts set _impactYaw (rad/frame),
+        // which decays as the tires regain grip on the sand.
+        if (v._impactYaw) {
+            v.th += v._impactYaw;
+            v._impactYaw *= Config.VC_YAW_DECAY;
+            if (Math.abs(v._impactYaw) < 0.002) v._impactYaw = 0;
+        }
+
         VehiclePhysics._steer(v, input, spin);
         VehiclePhysics._accel(v, input, spin);
         const collisions = VehiclePhysics._move(v, world, smugglerTruck, spin);
@@ -62,7 +70,9 @@ class VehiclePhysics {
         if (input.steer !== 0 && !spin && (as > 0.1 || input.throttle !== 0)) {
             const d = input.steer;
             const p = Math.abs(v.phi) / MX;
-            const r = BS * (1 - p * 0.5);
+            // Rate scales with |steer| — identity for keyboard (±1), lets the
+            // AI servo the wheel angle smoothly with fractional inputs.
+            const r = BS * (1 - p * 0.5) * Math.min(1, Math.abs(d));
 
             if (d > 0 && v.phi < MX) { v.phi += r; if (v.phi > MX) v.phi = MX; }
             if (d < 0 && v.phi > -MX) { v.phi -= r; if (v.phi < -MX) v.phi = -MX; }

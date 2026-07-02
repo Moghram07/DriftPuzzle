@@ -43,12 +43,39 @@ class Debug {
       text(`Steer: ${p.phi.toFixed(2)}`, 20, y); y += 20;
       text(`Spin: ${p.spinOutUntil > (window.frameCount || 0) ? 'YES' : 'no'}`, 20, y); y += 25;
     }
+    if (game.police && game.police._ai) {
+      const ai = game.police._ai;
+      fill(120, 200, 255);
+      text(`AI: ${ai.state}  vT=${ai.vTarget.toFixed(1)}  spd=${Math.abs(game.police.speed).toFixed(1)}`, 20, y); y += 20;
+    }
   }
 
   /** Collider outlines — call INSIDE camera transform (world-space). */
   draw(game) {
     if (!this.enabled) return;
     Debug._drawColliders(game);
+    Debug._drawAI(game);
+  }
+
+  /** Police AI internals: aim point, ray fan, chosen direction. */
+  static _drawAI(game) {
+    const police = game.police;
+    if (!police || !police._ai) return;
+    const ai = police._ai;
+
+    strokeWeight(2);
+    for (const r of ai.rays) {
+      const rx = Math.sin(r.angle), ry = -Math.cos(r.angle);
+      stroke(r.chosen ? color(0, 255, 80, 220) : color(160, 160, 160, 90));
+      line(police.x, police.y, police.x + rx * r.clear, police.y + ry * r.clear);
+    }
+    if (ai.aim) {
+      stroke(255, 0, 255, 200);
+      line(police.x, police.y, ai.aim.x, ai.aim.y);
+      noFill();
+      circle(ai.aim.x, ai.aim.y, 14);
+    }
+    noStroke();
   }
 
   static _drawColliders(game) {

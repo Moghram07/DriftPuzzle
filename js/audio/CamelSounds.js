@@ -20,8 +20,6 @@ class CamelSounds {
     const soundKey = state.toLowerCase();
     const path = this.paths[soundKey] || this.paths.normal;
 
-    console.log(`🐪 Requesting camel sound: ${state} -> ${path}`);
-
     if (!this.loader.has(path)) {
       console.warn(`🔇 Camel sound NOT loaded: ${path}. Available:`, Array.from(this.loader.buffers.keys()));
       return;
@@ -46,7 +44,12 @@ class CamelSounds {
     gain.connect(this.audioCtx.getDestination());
     source.start(0);
 
+    // Tear down the chain when playback ends — prevents GainNode buildup
+    source.onended = () => {
+      source.disconnect();
+      gain.disconnect();
+    };
+
     this.lastPlayed = now;
-    console.log(`🐫 PLAYING ${state} camel at ${hitSpeed.toFixed(1)} speed`);
   }
 }

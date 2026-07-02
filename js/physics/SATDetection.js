@@ -70,6 +70,62 @@ class SATDetection {
         return true;
     }
 
+    /**
+     * OBB vs OBB with contact info.
+     * Returns null if not overlapping, otherwise:
+     *   { nx, ny }  — unit collision normal (screen space), pointing from B toward A
+     *   { depth }   — penetration depth along the normal (px)
+     *   { cx, cy }  — approximate contact point (screen space)
+     */
+    static obbVsObbMTV(ax, ay, aw, ah, aAngle, bx, by, bw, bh, bAngle) {
+        const ca = SATDetection._obbCorners(ax, ay, aw, ah, aAngle);
+        const cb = SATDetection._obbCorners(bx, by, bw, bh, bAngle);
+        const cosA = Math.cos(aAngle), sinA = Math.sin(aAngle);
+        const cosB = Math.cos(bAngle), sinB = Math.sin(bAngle);
+        const axes = [[cosA, sinA], [-sinA, cosA], [cosB, sinB], [-sinB, cosB]];
+
+        let depth = Infinity;
+        let nx = 0, ny = 0;
+        for (const [axn, ayn] of axes) {
+            const [minA, maxA] = SATDetection._projectObb(ca, axn, ayn);
+            const [minB, maxB] = SATDetection._projectObb(cb, axn, ayn);
+            const overlap = Math.min(maxA, maxB) - Math.max(minA, minB);
+            if (overlap <= 0) return null;
+            if (overlap < depth) {
+                depth = overlap;
+                nx = axn; ny = ayn;
+            }
+        }
+
+        // Orient normal from B's center toward A's center
+        if ((ax - bx) * nx + (ay - by) * ny < 0) { nx = -nx; ny = -ny; }
+
+        // Contact point ≈ average of penetrating corners (fallback: midpoint)
+        let sx = 0, sy = 0, n = 0;
+        for (const c of ca) {
+            if (SATDetection._pointInObb(c[0], c[1], bx, by, bw, bh, bAngle)) {
+                sx += c[0]; sy += c[1]; n++;
+            }
+        }
+        for (const c of cb) {
+            if (SATDetection._pointInObb(c[0], c[1], ax, ay, aw, ah, aAngle)) {
+                sx += c[0]; sy += c[1]; n++;
+            }
+        }
+        const cx = n > 0 ? sx / n : (ax + bx) / 2;
+        const cy = n > 0 ? sy / n : (ay + by) / 2;
+
+        return { nx, ny, depth, cx, cy };
+    }
+
+    static _pointInObb(px, py, cx, cy, w, h, angle) {
+        const dx = px - cx, dy = py - cy;
+        const cos = Math.cos(angle), sin = Math.sin(angle);
+        const lx =  dx * cos + dy * sin;   // along width axis
+        const ly = -dx * sin + dy * cos;   // along height axis
+        return Math.abs(lx) <= w / 2 && Math.abs(ly) <= h / 2;
+    }
+
     static _obbCorners(cx, cy, w, h, angle) {
         const hw = w / 2, hh = h / 2;
         const cos = Math.cos(angle), sin = Math.sin(angle);

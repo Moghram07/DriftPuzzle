@@ -1,0 +1,74 @@
+[
+  {
+    "label": "cargo-kit",
+    "tool": "forge_item_kit",
+    "args": {
+      "items": [
+        "wooden cargo crate bound with rope, seen from directly above, top-down view",
+        "stack of three roped wooden cargo crates, seen from directly above, top-down view",
+        "burlap smuggler sack tied with cord, seen from directly above, top-down view",
+        "small golden camel statue, seen from directly above, top-down view"
+      ],
+      "names": ["crate", "crate-stack", "sack", "golden-camel"],
+      "outputPrefix": "C:/Users/Omar Alshehri/Desktop/DriftPuzzle/assets/images/cargo/cargo",
+      "size": 48,
+      "style": "retro",
+      "references": ["C:/Users/Omar Alshehri/Desktop/DriftPuzzle/assets/images/vehicles/SmugglerTruck.png"]
+    }
+  },
+  {
+    "label": "tile-dirt-road",
+    "tool": "forge_tileset",
+    "args": {
+      "description": "extreme close-up of packed desert dirt ground surface with two faint parallel tire track grooves, flat surface texture detail only, no buildings, no roads layout, no objects, no vehicles, just the dirt surface material",
+      "outputPath": "C:/Users/Omar Alshehri/Desktop/DriftPuzzle/assets/images/environment/tiles/dirt-road.png",
+      "size": 128,
+      "style": "retro"
+    }
+  },
+  {
+    "label": "tile-plaza",
+    "tool": "forge_tileset",
+    "args": {
+      "description": "mud-brick adobe plaza paving, sandy tan blocks with dusty mortar lines, flat surface texture detail only, no objects, 1950s Arabian desert town",
+      "outputPath": "C:/Users/Omar Alshehri/Desktop/DriftPuzzle/assets/images/environment/tiles/plaza.png",
+      "size": 128,
+      "style": "retro"
+    }
+  },
+  {
+    "label": "environment-props",
+    "tool": "forge_item_kit",
+    "args": {
+      "items": [
+        "stone water well with wooden crossbeam and bucket, seen from directly above, top-down view",
+        "cluster of desert boulders, seen from directly above, top-down view",
+        "wooden handcart loaded with clay pots, seen from directly above, top-down view",
+        "faded white painted circle ground marker on sand, seen from directly above, top-down view"
+      ],
+      "names": ["well", "rocks", "handcart", "drop-marker"],
+      "outputPrefix": "C:/Users/Omar Alshehri/Desktop/DriftPuzzle/assets/images/environment/props/prop",
+      "size": 96,
+      "style": "retro",
+      "references": ["C:/Users/Omar Alshehri/Desktop/DriftPuzzle/assets/images/environment/props/palmTree/texture.png"]
+    }
+  },
+  {
+    "label": "ui-icons",
+    "tool": "forge_item_kit",
+    "args": {
+      "items": [
+        "brass star police badge icon, 1950s style",
+        "iron handcuffs icon",
+        "leather coin pouch with gold coins icon",
+        "wooden crate icon",
+        "brass pocket watch icon",
+        "round red siren lamp icon, 1950s style"
+      ],
+      "names": ["badge", "handcuffs", "coins", "crate", "watch", "siren"],
+      "outputPrefix": "C:/Users/Omar Alshehri/Desktop/DriftPuzzle/assets/images/ui/icon",
+      "size": 32,
+      "style": "retro"
+    }
+  }
+]
